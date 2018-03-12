@@ -2,6 +2,21 @@ import React from 'react';
 import Player from './players/Player';
 
 class Scoreboard extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			score:0
+		};
+		this.incrementHandler = this.incrementHandler.bind(this);
+	}
+
+	incrementHandler(){
+		this.setState((prevState, props) =>{
+			return {score:prevState.score +1}
+		});
+	}
+
+
 	header(props){
 		return(
 			<div className="header">
@@ -17,13 +32,12 @@ class Scoreboard extends React.Component{
 				<this.header title={"scoreboard"} />
 
 				<div className="players">
-					{/* the value for this component is passed from the App class Component
-						to this Component then passed to the player component and then to PlayerRow Component */}
-					<Player name ={this.props.name} score={34}/>
-					<Player name ={"jay"} score={43}/>
 
-					<Player name ={"adam"} score={23}/>
-					<Player name ={"sam"} score={12}/>
+					<Player name ={"HELL WORLD!"} increment={this.incrementHandler} score={this.state.score}/>
+					<Player name ={"jay"} increment={this.incrementHandler} score={this.state.score}/>
+					<Player name ={"adam"} increment={this.incrementHandler} score={this.state.score}/>
+					<Player name ={"sam"} increment={this.incrementHandler} score={this.state.score}/>
+					<AddPlayerForm />
 
 				</div>
 
@@ -34,5 +48,16 @@ class Scoreboard extends React.Component{
 
 }
 
+
+const AddPlayerForm = (props)=>{
+	return(
+		<div className="add-player-form">
+			<form>
+				<input type="text" />
+				<input type="submit" />
+			</form>
+		</div>
+	);
+}
 
 export default Scoreboard;

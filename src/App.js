@@ -6,10 +6,14 @@ class App extends Component {
 
 	constructor(props) {
 		super(props);
-	  	this.state = {value: ''};
+	  	this.state = {
+			value: '',
+			score:0
+	};
 
 	  	this.handleChange = this.handleChange.bind(this);
 	  	this.handleSubmit = this.handleSubmit.bind(this);
+		this.incrementHandler = this.incrementHandler.bind(this);
 	}
 
 	handleChange(event) {
@@ -20,9 +24,14 @@ class App extends Component {
 	handleSubmit(event) {
 	  alert('A name was submitted: ' + this.state.value);
 	  event.preventDefault();
+
 	}
 
 
+	incrementHandler(event) {
+	  this.setState({score: this.state.score+1});
+	  console.log(this.state.score);
+	}
 
 
 
@@ -37,11 +46,12 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
 	  	</p>
-		<input type="text" onChange={this.handleChange} placeholder="player name"></input>
 
+		<input type="text" onChange={this.handleChange} placeholder="player name"></input>
 		<input type="submit" onClick={this.handleSubmit} placeholder="Add"></input>
 
-		<Scoreboard name={"hello world"}/>
+
+		<Scoreboard/>
 
       </div>
     );
