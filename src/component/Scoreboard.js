@@ -1,21 +1,78 @@
 import React from 'react';
 import Player from './players/Player';
 
+let id = 0;
 class Scoreboard extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			score:0
+			name:"",
+			players:[]
 		};
-		this.incrementHandler = this.incrementHandler.bind(this);
+		this.handleIncrement = this.handleIncrement.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.handleAddPlayer = this.handleAddPlayer.bind(this);
+	}
+	//increment player score
+	handleIncrement(id){
+			let newState = this.state.players.map( function(player){
+				if(player.id === id){
+					console.log(player, "is the one");
+					return player.score++;
+				}else{
+					console.log(player);
+					return player;
+				}
+			}
+		);
+		this.setState({players: newState});
+	}
+	// gets input value
+	handleChange(event) {
+		this.setState({name: event.target.value});
+		console.log(event.target.value);
+	}
+	// add new player
+	handleAddPlayer(e){
+		let name = this.state.name;
+		let newState = [...this.state.players, {name:name, score:0, id:id++}]
+		console.log(newState);
+		this.setState({players:newState});
+		console.log(id);
+		e.preventDefault();
 	}
 
-	incrementHandler(){
-		this.setState((prevState, props) =>{
-			return {score:prevState.score +1}
-		});
+	render(){
+		return(
+			<div className="scoreboard">
+				<this.header title={"scoreboard"} />
+
+				<div className="players">
+					{
+						this.state.players.map( player => <Player name={player.name} score={player.score}
+							increment={() => this.handleIncrement(player.id)} key={player.id}
+						/>)
+					}
+
+					<this.AddPlayerForm  />
+					<h1>{this.state.value}</h1>
+				</div>
+
+			</div>
+
+		);
 	}
 
+	AddPlayerForm = (props)=>{
+		return(
+			<div className="add-player-form">
+				<form>
+					<input type="text" value={this.state.name} onChange={this.handleChange}/>
+					<input type="submit" onClick={this.handleAddPlayer}/>
+				</form>
+			</div>
+		);
+	}
 
 	header(props){
 		return(
@@ -25,39 +82,7 @@ class Scoreboard extends React.Component{
 		);
 	}
 
-	render(){
-		return(
-			<div className="scoreboard">
-
-				<this.header title={"scoreboard"} />
-
-				<div className="players">
-
-					<Player name ={"HELL WORLD!"} increment={this.incrementHandler} score={this.state.score}/>
-					<Player name ={"jay"} increment={this.incrementHandler} score={this.state.score}/>
-					<Player name ={"adam"} increment={this.incrementHandler} score={this.state.score}/>
-					<Player name ={"sam"} increment={this.incrementHandler} score={this.state.score}/>
-					<AddPlayerForm />
-
-				</div>
-
-			</div>
-
-		);
-	}
-
 }
 
-
-const AddPlayerForm = (props)=>{
-	return(
-		<div className="add-player-form">
-			<form>
-				<input type="text" />
-				<input type="submit" />
-			</form>
-		</div>
-	);
-}
 
 export default Scoreboard;

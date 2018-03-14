@@ -13,7 +13,6 @@ class App extends Component {
 
 	  	this.handleChange = this.handleChange.bind(this);
 	  	this.handleSubmit = this.handleSubmit.bind(this);
-		this.incrementHandler = this.incrementHandler.bind(this);
 	}
 
 	handleChange(event) {
@@ -26,13 +25,6 @@ class App extends Component {
 	  event.preventDefault();
 
 	}
-
-
-	incrementHandler(event) {
-	  this.setState({score: this.state.score+1});
-	  console.log(this.state.score);
-	}
-
 
 
   render() {
