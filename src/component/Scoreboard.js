@@ -1,7 +1,7 @@
 import React from 'react';
 import Player from './players/Player';
 
-let id = 0;
+
 class Scoreboard extends React.Component{
 	constructor(props){
 		super(props);
@@ -9,36 +9,29 @@ class Scoreboard extends React.Component{
 			name:"",
 			players:[]
 		};
-		this.handleIncrement = this.handleIncrement.bind(this);
+		this.handleScoreUpdate = this.handleScoreUpdate.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleAddPlayer = this.handleAddPlayer.bind(this);
 	}
-	//increment player score
-	handleIncrement(id){
-			let newState = this.state.players.map( function(player){
-				if(player.id === id){
-					console.log(player, "is the one");
-					return player.score++;
-				}else{
-					console.log(player);
-					return player;
-				}
-			}
-		);
-		this.setState({players: newState});
+	//increment or decrement player score
+	handleScoreUpdate(index, val){
+		let newPlayers = this.state.players.slice();
+		newPlayers[index].score += val;
+		// sort the players based on score
+		newPlayers.sort((a, b) => b.score - a.score);
+		this.setState({players: newPlayers});
 	}
-	// gets input value
+	// gets input value and update the state with new input
 	handleChange(event) {
 		this.setState({name: event.target.value});
-		console.log(event.target.value);
 	}
 	// add new player
 	handleAddPlayer(e){
 		let name = this.state.name;
-		let newState = [...this.state.players, {name:name, score:0, id:id++}]
-		console.log(newState);
-		this.setState({players:newState});
-		console.log(id);
+		let newPlayers = [...this.state.players, {name:name, score:0}];
+		// sort the newPlayers
+		newPlayers.sort((a, b) => b.score - a.score);
+		this.setState({players:newPlayers});
 		e.preventDefault();
 	}
 
@@ -49,13 +42,14 @@ class Scoreboard extends React.Component{
 
 				<div className="players">
 					{
-						this.state.players.map( player => <Player name={player.name} score={player.score}
-							increment={() => this.handleIncrement(player.id)} key={player.id}
+						this.state.players.map( (player, index) => <Player name={player.name} score={player.score}
+							key={index} increment={() => this.handleScoreUpdate(index,1)}
+							decrement={() => this.handleScoreUpdate(index,-1)}
 						/>)
 					}
 
 					<this.AddPlayerForm  />
-					<h1>{this.state.value}</h1>
+					<h1>{this.state.name}</h1>
 				</div>
 
 			</div>
