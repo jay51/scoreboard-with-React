@@ -61,13 +61,13 @@ body {
   font-weight: normal;
 }
 
-  .stats td:first-child {
-    text-align: right;
-    font-weight: normal;
-    letter-spacing: 2px;
-    color: #666;
-    font-size: .7em;
-  }
+.stats td:first-child {
+text-align: right;
+font-weight: normal;
+letter-spacing: 2px;
+color: #666;
+font-size: .7em;
+}
 
   .stats td:last-child {
     text-align: left;
@@ -124,7 +124,7 @@ body {
     margin-right: 10px;
     color: #e57373;
     cursor: pointer;
-	float: left;
+	float: left;/*modified*/
   }
 
   .player-name:hover .remove-player {

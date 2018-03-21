@@ -46,8 +46,7 @@ class Scoreboard extends React.Component{
 	render(){
 		return(
 			<div className="scoreboard">
-				<this.header title={"scoreboard"} />
-
+				<this.header title={"scoreboard"} players={this.state.players} />
 				<div className="players">
 					{
 						this.state.players.map( (player, index) => <Player name={player.name} score={player.score}
@@ -78,9 +77,18 @@ class Scoreboard extends React.Component{
 	}
 
 	header(props){
+		let totalPlayers = props.players.length;
+		let totalPoint = props.players.reduce((points, player)=> points + player.score, 0);
 		return(
 			<div className="header">
 				<h1>{props.title}</h1>
+				<table className="stats">
+					<tbody>
+						<tr><td>Players:</td><td>{totalPlayers}</td></tr>
+						<tr><td>Total Points:</td><td>{totalPoint}</td></tr>
+					</tbody>
+				</table>
+
 			</div>
 		);
 	}
