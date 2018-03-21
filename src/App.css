@@ -124,6 +124,7 @@ body {
     margin-right: 10px;
     color: #e57373;
     cursor: pointer;
+	float: left;
   }
 
   .player-name:hover .remove-player {

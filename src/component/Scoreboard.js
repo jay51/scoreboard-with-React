@@ -12,6 +12,7 @@ class Scoreboard extends React.Component{
 		this.handleScoreUpdate = this.handleScoreUpdate.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleAddPlayer = this.handleAddPlayer.bind(this);
+		this.handleRemove = this.handleRemove.bind(this);
 	}
 	//increment or decrement player score
 	handleScoreUpdate(index, val){
@@ -34,6 +35,13 @@ class Scoreboard extends React.Component{
 		this.setState({players:newPlayers});
 		e.preventDefault();
 	}
+	// handle removing player
+	handleRemove(index){
+		let newPlayers = this.state.players;
+		newPlayers.splice(index, 1);
+		newPlayers.sort((a,b) => b.score - a.score);
+		this.setState({players:newPlayers});
+	}
 
 	render(){
 		return(
@@ -45,6 +53,7 @@ class Scoreboard extends React.Component{
 						this.state.players.map( (player, index) => <Player name={player.name} score={player.score}
 							key={index} increment={() => this.handleScoreUpdate(index,1)}
 							decrement={() => this.handleScoreUpdate(index,-1)}
+							remove={() => this.handleRemove(index)}
 						/>)
 					}
 
