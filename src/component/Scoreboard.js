@@ -1,6 +1,6 @@
 import React from 'react';
 import Player from './players/Player';
-
+import StopWatch from "./Watch";
 
 class Scoreboard extends React.Component{
 	constructor(props){
@@ -88,6 +88,7 @@ class Scoreboard extends React.Component{
 						<tr><td>Total Points:</td><td>{totalPoint}</td></tr>
 					</tbody>
 				</table>
+				<StopWatch />
 
 			</div>
 		);
