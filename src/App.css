@@ -192,7 +192,7 @@ font-size: .7em;
 .add-player-form form {
   display: flex;
   background-color: #222;
-  border-radius: 0 0 20px 20px
+  border-radius: 0 0 20px 20px;
 }
 
   .add-player-form input[type=text] {
@@ -208,6 +208,7 @@ font-size: .7em;
     color: #999;
     letter-spacing: 2px;
     outline: none;
+    overflow: hidden;
   }
 
   .add-player-form input[type=text]::-webkit-input-placeholder{

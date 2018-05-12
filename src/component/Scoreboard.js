@@ -44,6 +44,8 @@ class Scoreboard extends React.Component{
 	}
 
 	render(){
+		// let appState = JSON.stringify(this.state);
+		// sessionStorage.setItem("state", appState);
 		return(
 			<div className="scoreboard">
 				<this.header title={"scoreboard"} players={this.state.players} />
